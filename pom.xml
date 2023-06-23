@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	
     <groupId>com.juhai</groupId>
-    <artifactId>yiliao</artifactId>
+    <artifactId>yinni</artifactId>
     <version>3.8.5</version>
 
-    <name>yiliao</name>
+    <name>yinni</name>
     <url>http://www.ruoyi.vip</url>
     <description>后台管理系统</description>
     
@@ -139,35 +139,42 @@
             <!-- 定时任务-->
             <dependency>
                 <groupId>com.juhai</groupId>
-                <artifactId>yiliao-quartz</artifactId>
+                <artifactId>yinni-quartz</artifactId>
                 <version>${yiliao.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
                 <groupId>com.juhai</groupId>
-                <artifactId>yiliao-generator</artifactId>
+                <artifactId>yinni-generator</artifactId>
                 <version>${yiliao.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
                 <groupId>com.juhai</groupId>
-                <artifactId>yiliao-framework</artifactId>
+                <artifactId>yinni-framework</artifactId>
                 <version>${yiliao.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.juhai</groupId>
-                <artifactId>yiliao-system</artifactId>
+                <artifactId>yinni-system</artifactId>
                 <version>${yiliao.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.juhai</groupId>
-                <artifactId>yiliao-common</artifactId>
+                <artifactId>yinni-common</artifactId>
+                <version>${yiliao.version}</version>
+            </dependency>
+
+            <!-- 通用工具-->
+            <dependency>
+                <groupId>com.juhai</groupId>
+                <artifactId>yinni-business</artifactId>
                 <version>${yiliao.version}</version>
             </dependency>
 
@@ -191,13 +198,13 @@
     </dependencyManagement>
 
     <modules>
-        <module>yiliao-admin</module>
-        <module>yiliao-framework</module>
-        <module>yiliao-system</module>
-        <module>yiliao-quartz</module>
-        <module>yiliao-generator</module>
-        <module>yiliao-common</module>
-        <module>yiliao-business</module>
+        <module>yinni-admin</module>
+        <module>yinni-framework</module>
+        <module>yinni-system</module>
+        <module>yinni-quartz</module>
+        <module>yinni-generator</module>
+        <module>yinni-common</module>
+        <module>yinni-business</module>
     </modules>
     <packaging>pom</packaging>
 
