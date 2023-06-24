@@ -1,6 +1,11 @@
 package com.juhai.business.domain;
 
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.juhai.common.annotation.Excel;
@@ -12,11 +17,14 @@ import com.juhai.common.core.domain.BaseEntity;
  * @author zhaotiezhu
  * @date 2023-05-24
  */
+@Data
+@TableName(value ="t_day_report")
 public class DayReport
 {
     private static final long serialVersionUID = 1L;
 
     /** id */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /** 日期 */

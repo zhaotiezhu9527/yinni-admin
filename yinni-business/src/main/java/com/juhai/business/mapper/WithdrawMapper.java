@@ -1,6 +1,8 @@
 package com.juhai.business.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.juhai.business.domain.Withdraw;
 
 /**
@@ -9,7 +11,7 @@ import com.juhai.business.domain.Withdraw;
  * @author zhaotiezhu
  * @date 2023-05-21
  */
-public interface WithdrawMapper 
+public interface WithdrawMapper extends BaseMapper<Withdraw>
 {
     /**
      * 查询【请填写功能名称】

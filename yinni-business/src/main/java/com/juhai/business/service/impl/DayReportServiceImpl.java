@@ -1,6 +1,10 @@
 package com.juhai.business.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juhai.business.domain.Account;
+import com.juhai.business.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.juhai.business.mapper.DayReportMapper;
@@ -14,7 +18,7 @@ import com.juhai.business.service.IDayReportService;
  * @date 2023-05-24
  */
 @Service
-public class DayReportServiceImpl implements IDayReportService 
+public class DayReportServiceImpl extends ServiceImpl<DayReportMapper, DayReport> implements IDayReportService
 {
     @Autowired
     private DayReportMapper dayReportMapper;

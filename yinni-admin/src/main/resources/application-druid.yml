@@ -6,7 +6,7 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://rm-gs5o2g3papr65togk9o.mysql.singapore.rds.aliyuncs.com:3306/yimiao?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                url: jdbc:mysql://rm-gs5o2g3papr65togk9o.mysql.singapore.rds.aliyuncs.com:3306/yinni?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: local
                 password: a0gC9&2EGoOY^MJZ
             # 从库数据源
@@ -65,7 +65,7 @@ spring:
         # 端口，默认为6379
         port: 6379
         # 数据库索引
-        database: 0
+        database: 2
         # 密码
         password: 30Q84d8GE4LBYzbM
         # 连接超时时间
@@ -91,4 +91,4 @@ spring:
               end-point: oss-ap-southeast-1.aliyuncs.com
               bucket-name: juhaijituan
               domain: https://juhaijituan.oss-ap-southeast-1.aliyuncs.com/
-              base-path: yiliao/
+              base-path: yinni/

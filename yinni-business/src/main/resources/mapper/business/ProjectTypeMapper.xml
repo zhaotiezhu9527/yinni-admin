@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juhai.business.mapper.ProjectTypeMapper">
+    
+    <resultMap type="ProjectType" id="ProjectTypeResult">
+        <result property="id"    column="id"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+
+    <sql id="selectProjectTypeVo">
+        select id, type_name, status, sort from t_project_type
+    </sql>
+
+    <select id="selectProjectTypeList" parameterType="ProjectType" resultMap="ProjectTypeResult">
+        <include refid="selectProjectTypeVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectProjectTypeById" parameterType="Long" resultMap="ProjectTypeResult">
+        <include refid="selectProjectTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProjectType" parameterType="ProjectType" useGeneratedKeys="true" keyProperty="id">
+        insert into t_project_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeName != null">type_name,</if>
+            <if test="status != null">status,</if>
+            <if test="sort != null">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeName != null">#{typeName},</if>
+            <if test="status != null">#{status},</if>
+            <if test="sort != null">#{sort},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProjectType" parameterType="ProjectType">
+        update t_project_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null">type_name = #{typeName},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="sort != null">sort = #{sort},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProjectTypeById" parameterType="Long">
+        delete from t_project_type where id = #{id}
+    </delete>
+
+    <delete id="deleteProjectTypeByIds" parameterType="String">
+        delete from t_project_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

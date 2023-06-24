@@ -2,7 +2,12 @@ package com.juhai.business.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.juhai.common.annotation.Excel;
@@ -14,11 +19,14 @@ import com.juhai.common.core.domain.BaseEntity;
  * @author zhaotiezhu
  * @date 2023-05-21
  */
+@Data
+@TableName(value ="t_user")
 public class User extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /** 用户名 */

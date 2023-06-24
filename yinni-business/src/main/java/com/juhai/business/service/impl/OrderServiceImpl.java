@@ -1,6 +1,10 @@
 package com.juhai.business.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juhai.business.domain.Deposit;
+import com.juhai.business.mapper.DepositMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.juhai.business.mapper.OrderMapper;
@@ -14,7 +18,7 @@ import com.juhai.business.service.IOrderService;
  * @date 2023-05-22
  */
 @Service
-public class OrderServiceImpl implements IOrderService 
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService
 {
     @Autowired
     private OrderMapper orderMapper;

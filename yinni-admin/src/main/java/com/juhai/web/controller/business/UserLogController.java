@@ -45,7 +45,6 @@ public class UserLogController extends BaseController
     public TableDataInfo list(UserLog userLog)
     {
         startPage();
-        System.out.println(JSON.toJSONString(userLog));
         List<UserLog> list = userLogService.selectUserLogList(userLog);
         return getDataTable(list);
     }

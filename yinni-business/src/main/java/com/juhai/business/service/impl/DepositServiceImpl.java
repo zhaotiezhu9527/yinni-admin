@@ -1,6 +1,8 @@
 package com.juhai.business.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.juhai.business.mapper.DepositMapper;
@@ -14,7 +16,7 @@ import com.juhai.business.service.IDepositService;
  * @date 2023-05-21
  */
 @Service
-public class DepositServiceImpl implements IDepositService 
+public class DepositServiceImpl extends ServiceImpl<DepositMapper, Deposit> implements IDepositService
 {
     @Autowired
     private DepositMapper depositMapper;

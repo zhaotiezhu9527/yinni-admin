@@ -1,6 +1,8 @@
 package com.juhai.business.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.juhai.business.mapper.AccountMapper;
@@ -14,7 +16,7 @@ import com.juhai.business.service.IAccountService;
  * @date 2023-05-21
  */
 @Service
-public class AccountServiceImpl implements IAccountService 
+public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService
 {
     @Autowired
     private AccountMapper accountMapper;

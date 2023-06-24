@@ -1,6 +1,10 @@
 package com.juhai.business.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juhai.business.domain.UserLog;
+import com.juhai.business.mapper.UserLogMapper;
 import com.juhai.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,7 @@ import com.juhai.business.service.IProjectService;
  * @date 2023-05-21
  */
 @Service
-public class ProjectServiceImpl implements IProjectService 
+public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> implements IProjectService
 {
     @Autowired
     private ProjectMapper projectMapper;

@@ -3,7 +3,9 @@ package com.juhai.business.service;
 import java.util.List;
 import java.util.Map;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.juhai.business.domain.Paramter;
+import com.juhai.business.domain.Project;
 
 /**
  * 【请填写功能名称】Service接口
@@ -11,7 +13,7 @@ import com.juhai.business.domain.Paramter;
  * @author zhaotiezhu
  * @date 2023-05-21
  */
-public interface IParamterService 
+public interface IParamterService extends IService<Paramter>
 {
     /**
      * 查询【请填写功能名称】

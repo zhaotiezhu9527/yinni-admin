@@ -1,6 +1,9 @@
 package com.juhai.business.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.juhai.business.domain.Account;
 import com.juhai.business.domain.DayReport;
 
 /**
@@ -9,7 +12,7 @@ import com.juhai.business.domain.DayReport;
  * @author zhaotiezhu
  * @date 2023-05-24
  */
-public interface IDayReportService 
+public interface IDayReportService extends IService<DayReport>
 {
     /**
      * 查询日报表

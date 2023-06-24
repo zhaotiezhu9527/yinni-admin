@@ -1,6 +1,9 @@
 package com.juhai.business.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.juhai.business.domain.Deposit;
 import com.juhai.business.domain.Order;
 
 /**
@@ -9,7 +12,7 @@ import com.juhai.business.domain.Order;
  * @author zhaotiezhu
  * @date 2023-05-22
  */
-public interface OrderMapper 
+public interface OrderMapper extends BaseMapper<Order>
 {
     /**
      * 查询【请填写功能名称】

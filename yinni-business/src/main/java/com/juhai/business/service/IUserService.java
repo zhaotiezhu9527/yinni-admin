@@ -2,6 +2,8 @@ package com.juhai.business.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.juhai.business.domain.User;
 
 /**
@@ -10,7 +12,7 @@ import com.juhai.business.domain.User;
  * @author zhaotiezhu
  * @date 2023-05-21
  */
-public interface IUserService 
+public interface IUserService extends IService<User>
 {
     /**
      * 查询【请填写功能名称】

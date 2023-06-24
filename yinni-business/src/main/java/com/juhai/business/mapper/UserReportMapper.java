@@ -1,6 +1,9 @@
 package com.juhai.business.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.juhai.business.domain.User;
 import com.juhai.business.domain.UserReport;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @author zhaotiezhu
  * @date 2023-05-24
  */
-public interface UserReportMapper 
+public interface UserReportMapper extends BaseMapper<UserReport>
 {
     /**
      * 查询用户日报表

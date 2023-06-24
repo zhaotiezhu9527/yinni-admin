@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import cn.hutool.core.collection.CollStreamUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juhai.business.domain.Project;
+import com.juhai.business.mapper.ProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.juhai.business.mapper.ParamterMapper;
@@ -17,7 +20,7 @@ import com.juhai.business.service.IParamterService;
  * @date 2023-05-21
  */
 @Service
-public class ParamterServiceImpl implements IParamterService 
+public class ParamterServiceImpl extends ServiceImpl<ParamterMapper, Paramter> implements IParamterService
 {
     @Autowired
     private ParamterMapper paramterMapper;

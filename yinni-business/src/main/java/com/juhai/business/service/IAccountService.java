@@ -1,6 +1,8 @@
 package com.juhai.business.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.juhai.business.domain.Account;
 
 /**
@@ -9,7 +11,7 @@ import com.juhai.business.domain.Account;
  * @author zhaotiezhu
  * @date 2023-05-21
  */
-public interface IAccountService 
+public interface IAccountService extends IService<Account>
 {
     /**
      * 查询【请填写功能名称】

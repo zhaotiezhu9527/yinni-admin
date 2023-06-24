@@ -1,7 +1,10 @@
 package com.juhai.business.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.juhai.business.domain.Project;
+import com.juhai.business.domain.UserLog;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -9,7 +12,7 @@ import com.juhai.business.domain.Project;
  * @author zhaotiezhu
  * @date 2023-05-21
  */
-public interface ProjectMapper 
+public interface ProjectMapper extends BaseMapper<Project>
 {
     /**
      * 查询【请填写功能名称】

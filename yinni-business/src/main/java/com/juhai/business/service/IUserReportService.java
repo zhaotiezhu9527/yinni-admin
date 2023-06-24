@@ -1,6 +1,9 @@
 package com.juhai.business.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.juhai.business.domain.User;
 import com.juhai.business.domain.UserReport;
 
 /**
@@ -9,7 +12,7 @@ import com.juhai.business.domain.UserReport;
  * @author zhaotiezhu
  * @date 2023-05-24
  */
-public interface IUserReportService 
+public interface IUserReportService extends IService<UserReport>
 {
     /**
      * 查询用户日报表

@@ -1,7 +1,10 @@
 package com.juhai.business.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.juhai.business.domain.DayReport;
+import com.juhai.business.domain.Deposit;
 
 /**
  * 日报表Mapper接口
@@ -9,7 +12,7 @@ import com.juhai.business.domain.DayReport;
  * @author zhaotiezhu
  * @date 2023-05-24
  */
-public interface DayReportMapper 
+public interface DayReportMapper extends BaseMapper<DayReport>
 {
     /**
      * 查询日报表

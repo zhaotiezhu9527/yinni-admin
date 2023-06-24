@@ -1,6 +1,8 @@
 package com.juhai.business.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.juhai.business.mapper.WithdrawMapper;
@@ -14,7 +16,7 @@ import com.juhai.business.service.IWithdrawService;
  * @date 2023-05-21
  */
 @Service
-public class WithdrawServiceImpl implements IWithdrawService 
+public class WithdrawServiceImpl extends ServiceImpl<WithdrawMapper, Withdraw> implements IWithdrawService
 {
     @Autowired
     private WithdrawMapper withdrawMapper;
