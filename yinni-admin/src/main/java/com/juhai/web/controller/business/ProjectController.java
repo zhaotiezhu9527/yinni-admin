@@ -2,10 +2,14 @@ package com.juhai.web.controller.business;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.map.MapUtil;
+import com.juhai.business.domain.ProjectType;
 import com.juhai.business.service.IParamterService;
+import com.juhai.business.service.IProjectTypeService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +45,9 @@ public class ProjectController extends BaseController
     @Autowired
     private IParamterService paramterService;
 
+    @Autowired
+    private IProjectTypeService projectTypeService;
+
     /**
      * 查询【请填写功能名称】列表
      */
@@ -50,13 +57,13 @@ public class ProjectController extends BaseController
     {
         startPage();
         List<Project> list = projectService.selectProjectList(project);
-//        if (CollUtil.isNotEmpty(list)) {
-//            Map<String, String> params = paramterService.getAllParamByMap();
-//            String resourceDomain = params.get("resource_domain");
-//            for (Project temp : list) {
-//                temp.setImg(resourceDomain + temp.getImg());
-//            }
-//        }
+        if (CollUtil.isNotEmpty(list)) {
+            List<ProjectType> types = projectTypeService.list();
+            Map<Long, String> typsMap = types.stream().collect(Collectors.toMap(ProjectType::getId, e -> e.getTypeName()));
+            for (Project project1 : list) {
+                project1.setTypeName(MapUtil.getStr(typsMap, project1.getTypeId(), "-"));
+            }
+        }
         return getDataTable(list);
     }
 
@@ -97,6 +104,7 @@ public class ProjectController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody Project project)
     {
+        project.setStatus(0L);
         return toAjax(projectService.insertProject(project));
     }
 

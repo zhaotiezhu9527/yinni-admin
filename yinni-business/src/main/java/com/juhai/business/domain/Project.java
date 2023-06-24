@@ -1,17 +1,16 @@
 package com.juhai.business.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.juhai.common.annotation.Excel;
 import com.juhai.common.core.domain.BaseEntity;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 【请填写功能名称】对象 t_project
@@ -84,151 +83,9 @@ public class Project extends BaseEntity
     @Excel(name = "图片地址")
     private String img;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+    @Excel(name = "分类ID")
+    private Long typeId;
 
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setProjectName(String projectName) 
-    {
-        this.projectName = projectName;
-    }
-
-    public String getProjectName() 
-    {
-        return projectName;
-    }
-    public void setProjectAmount(BigDecimal projectAmount) 
-    {
-        this.projectAmount = projectAmount;
-    }
-
-    public BigDecimal getProjectAmount() 
-    {
-        return projectAmount;
-    }
-    public void setIncomeRate(BigDecimal incomeRate) 
-    {
-        this.incomeRate = incomeRate;
-    }
-
-    public BigDecimal getIncomeRate() 
-    {
-        return incomeRate;
-    }
-    public void setLimitTime(Long limitTime) 
-    {
-        this.limitTime = limitTime;
-    }
-
-    public Long getLimitTime() 
-    {
-        return limitTime;
-    }
-    public void setMinAmount(BigDecimal minAmount) 
-    {
-        this.minAmount = minAmount;
-    }
-
-    public BigDecimal getMinAmount() 
-    {
-        return minAmount;
-    }
-    public void setStatus(Long status) 
-    {
-        this.status = status;
-    }
-
-    public Long getStatus() 
-    {
-        return status;
-    }
-    public void setStartTime(Date startTime) 
-    {
-        this.startTime = startTime;
-    }
-
-    public Date getStartTime() 
-    {
-        return startTime;
-    }
-    public void setEndTime(Date endTime) 
-    {
-        this.endTime = endTime;
-    }
-
-    public Date getEndTime() 
-    {
-        return endTime;
-    }
-    public void setSchedule(String schedule) 
-    {
-        this.schedule = schedule;
-    }
-
-    public String getSchedule() 
-    {
-        return schedule;
-    }
-    public void setGuaranteeCompany(String guaranteeCompany) 
-    {
-        this.guaranteeCompany = guaranteeCompany;
-    }
-
-    public String getGuaranteeCompany() 
-    {
-        return guaranteeCompany;
-    }
-    public void setSort(Long sort) 
-    {
-        this.sort = sort;
-    }
-
-    public Long getSort() 
-    {
-        return sort;
-    }
-    public void setModifyTime(Date modifyTime) 
-    {
-        this.modifyTime = modifyTime;
-    }
-
-    public Date getModifyTime() 
-    {
-        return modifyTime;
-    }
-    public void setImg(String img) 
-    {
-        this.img = img;
-    }
-
-    public String getImg() 
-    {
-        return img;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("projectName", getProjectName())
-            .append("projectAmount", getProjectAmount())
-            .append("incomeRate", getIncomeRate())
-            .append("limitTime", getLimitTime())
-            .append("minAmount", getMinAmount())
-            .append("status", getStatus())
-            .append("startTime", getStartTime())
-            .append("endTime", getEndTime())
-            .append("schedule", getSchedule())
-            .append("guaranteeCompany", getGuaranteeCompany())
-            .append("sort", getSort())
-            .append("createTime", getCreateTime())
-            .append("modifyTime", getModifyTime())
-            .append("img", getImg())
-            .toString();
-    }
+    @TableField(exist = false)
+    private String typeName;
 }

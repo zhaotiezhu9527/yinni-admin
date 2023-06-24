@@ -1,7 +1,10 @@
 package com.juhai.business.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.juhai.business.domain.ProjectType;
+import com.juhai.business.domain.UserLog;
 
 /**
  * 商品分类Service接口
@@ -9,7 +12,7 @@ import com.juhai.business.domain.ProjectType;
  * @author zhaotiezhu
  * @date 2023-06-24
  */
-public interface IProjectTypeService 
+public interface IProjectTypeService extends IService<ProjectType>
 {
     /**
      * 查询商品分类

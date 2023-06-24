@@ -1,7 +1,9 @@
 package com.juhai.business.mapper;
 
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.juhai.business.domain.ProjectType;
+
+import java.util.List;
 
 /**
  * 商品分类Mapper接口
@@ -9,7 +11,7 @@ import com.juhai.business.domain.ProjectType;
  * @author zhaotiezhu
  * @date 2023-06-24
  */
-public interface ProjectTypeMapper 
+public interface ProjectTypeMapper extends BaseMapper<ProjectType>
 {
     /**
      * 查询商品分类
