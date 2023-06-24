@@ -1,11 +1,13 @@
 package com.juhai.business.service.impl;
 
-import java.util.List;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juhai.business.domain.ProjectType;
+import com.juhai.business.mapper.ProjectTypeMapper;
+import com.juhai.business.service.IProjectTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.juhai.business.mapper.ProjectTypeMapper;
-import com.juhai.business.domain.ProjectType;
-import com.juhai.business.service.IProjectTypeService;
+
+import java.util.List;
 
 /**
  * 商品分类Service业务层处理
@@ -14,7 +16,7 @@ import com.juhai.business.service.IProjectTypeService;
  * @date 2023-06-24
  */
 @Service
-public class ProjectTypeServiceImpl implements IProjectTypeService 
+public class ProjectTypeServiceImpl extends ServiceImpl<ProjectTypeMapper, ProjectType> implements IProjectTypeService
 {
     @Autowired
     private ProjectTypeMapper projectTypeMapper;

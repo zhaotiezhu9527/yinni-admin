@@ -1,5 +1,9 @@
 package com.juhai.business.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.juhai.common.annotation.Excel;
@@ -11,11 +15,14 @@ import com.juhai.common.core.domain.BaseEntity;
  * @author zhaotiezhu
  * @date 2023-06-24
  */
+@Data
+@TableName(value ="t_project_type")
 public class ProjectType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** id */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /** 分类名称 */
@@ -30,7 +37,7 @@ public class ProjectType extends BaseEntity
     @Excel(name = "排序号")
     private Long sort;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }

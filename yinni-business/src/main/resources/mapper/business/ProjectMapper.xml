@@ -20,16 +20,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="modifyTime"    column="modify_time"    />
         <result property="img"    column="img"    />
+        <result property="typeId"    column="type_id"    />
     </resultMap>
 
     <sql id="selectProjectVo">
-        select id, project_name, project_amount, income_rate, limit_time, min_amount, status, start_time, end_time, schedule, guarantee_company, sort, create_time, modify_time, img from t_project
+        select id, type_id, project_name, project_amount, income_rate, limit_time, min_amount, status, start_time, end_time, schedule, guarantee_company, sort, create_time, modify_time, img from t_project
     </sql>
 
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
         <include refid="selectProjectVo"/>
         <where>  
             <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="typeId != null  and typeId != ''"> and type_id = #{typeId}</if>
 <!--            <if test="projectAmount != null "> and project_amount = #{projectAmount}</if>-->
 <!--            <if test="incomeRate != null "> and income_rate = #{incomeRate}</if>-->
 <!--            <if test="limitTime != null "> and limit_time = #{limitTime}</if>-->
@@ -56,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="projectName != null">project_name,</if>
             <if test="projectAmount != null">project_amount,</if>
+            <if test="typeId != null">type_id,</if>
             <if test="incomeRate != null">income_rate,</if>
             <if test="limitTime != null">limit_time,</if>
             <if test="minAmount != null">min_amount,</if>
@@ -72,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="projectName != null">#{projectName},</if>
             <if test="projectAmount != null">#{projectAmount},</if>
+            <if test="typeId != null">#{typeId},</if>
             <if test="incomeRate != null">#{incomeRate},</if>
             <if test="limitTime != null">#{limitTime},</if>
             <if test="minAmount != null">#{minAmount},</if>
@@ -93,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="projectName != null">project_name = #{projectName},</if>
             <if test="projectAmount != null">project_amount = #{projectAmount},</if>
             <if test="incomeRate != null">income_rate = #{incomeRate},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
             <if test="limitTime != null">limit_time = #{limitTime},</if>
             <if test="minAmount != null">min_amount = #{minAmount},</if>
             <if test="status != null">status = #{status},</if>
