@@ -1,13 +1,24 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="项目名称" prop="projectName">
+      <el-form-item label="商品名称" prop="projectName">
         <el-input
           v-model="queryParams.projectName"
-          placeholder="请输入项目名称"
+          placeholder="请输入商品名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
+      </el-form-item>
+      <el-form-item label="商品分类" prop="typeId">
+        <el-select v-model="queryParams.typeId" placeholder="请选择">
+          <el-option label="全部" value=""></el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="item.id"
+            :label="item.typeName"
+            :value="item.id">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -65,21 +76,28 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="排序" align="center" prop="sort" />
-      <el-table-column label="项目名称" align="center" prop="projectName" />
+      <el-table-column label="商品名称" align="center" prop="projectName" width="180"/>
+      <el-table-column label="商品分类" align="center" prop="typeName"/>
       <el-table-column label="图片" align="center" prop="img">
         <template slot-scope="scope">
           <img class="img-class" :src="resourceDomain.resourceDomain + scope.row.img" />
         </template> 
       </el-table-column>
-      <el-table-column label="项目金额(万元)" align="center" prop="projectAmount" />
+      <el-table-column label="商品金额(万元)" align="center" prop="projectAmount" />
       <el-table-column label="收益率（%）" align="center" prop="incomeRate" />
       <el-table-column label="期限(分钟)" align="center" prop="limitTime" />
       <el-table-column label="起投金额" align="center" prop="minAmount" />
       <el-table-column label="是否开启" align="center" prop="status">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.status === 0" type="success">可投</el-tag>
-          <el-tag v-else-if="scope.row.status === 1" type="danger">不可投</el-tag>
-        </template>
+          <el-switch
+              v-model="scope.row.status"
+              @change="changeStatus(scope.row.id,scope.row.status)"
+              :active-value="0"
+              :inactive-value="1"
+              active-color="#13ce66"
+              inactive-color="#ff4949">
+            </el-switch>
+        </template>  
       </el-table-column>
       <el-table-column label="开始时间" align="center" prop="startTime" width="180">
         <template slot-scope="scope">
@@ -91,7 +109,7 @@
           <span>{{ parseTime(scope.row.endTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" fixed="right" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -122,11 +140,21 @@
     <!-- 添加或修改【请填写功能名称】对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body :loading="formLoading">
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
-        <el-form-item label="产品名称" prop="projectName">
-          <el-input v-model="form.projectName" placeholder="请输入产品名称" />
+        <el-form-item label="商品名称" prop="projectName">
+          <el-input v-model="form.projectName" placeholder="请输入商品名称" />
         </el-form-item>
-        <el-form-item label="项目金额(万元)" prop="projectAmount">
-          <el-input v-model="form.projectAmount" placeholder="请输入项目金额(万元)" />
+        <el-form-item label="商品分类" prop="typeId">
+          <el-select v-model="form.typeId">
+            <el-option
+              v-for="item in typeList"
+              :key="item.id"
+              :label="item.typeName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="商品金额(万元)" prop="projectAmount">
+          <el-input v-model="form.projectAmount" placeholder="请输入商品金额(万元)" />
         </el-form-item>
         <el-form-item label="收益率" prop="incomeRate">
           <el-input v-model="form.incomeRate" placeholder="请输入收益率" />
@@ -153,8 +181,8 @@
             placeholder="选择日期时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="项目进度" prop="schedule">
-          <el-input v-model="form.schedule" placeholder="请输入项目进度" />
+        <el-form-item label="商品进度" prop="schedule">
+          <el-input v-model="form.schedule" placeholder="请输入商品进度" />
         </el-form-item>
         <el-form-item label="排序号(值越大越靠前)" prop="sort">
           <el-input v-model="form.sort" placeholder="请输入排序号(值越大越靠前)" />
@@ -172,12 +200,12 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <!-- <el-form-item label="状态" prop="status">
           <el-select v-model="form.status">
             <el-option label="开启" :value="0"></el-option>
             <el-option label="关闭" :value="1"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -189,6 +217,7 @@
 
 <script>
 import { listProject, getProject, delProject, addProject, updateProject } from "@/api/business/project";
+import { listType} from "@/api/business/type";
 import { getToken } from "@/utils/auth";
 import Cookies from "js-cookie";
 
@@ -219,6 +248,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         projectName: null,
+        typeId:"",
       },
       // 表单参数
       form: {},
@@ -240,16 +270,19 @@ export default {
           { required: true, message: "请选择状态", trigger: "blur" }
         ],
         projectName: [
-          { required: true, message: "请输入产品名称", trigger: "blur" }
+          { required: true, message: "请输入商品名称", trigger: "blur" }
         ],
         projectAmount: [
-          { required: true, message: "请输入项目金额", trigger: "blur" }
+          { required: true, message: "请输入商品金额", trigger: "blur" }
         ],
         minAmount: [
           { required: true, message: "请输入起投金额", trigger: "blur" }
         ],
         schedule: [
-          { required: true, message: "请输入项目进度", trigger: "blur" }
+          { required: true, message: "请输入商品进度", trigger: "blur" }
+        ],
+        typeId: [
+          { required: true, message: "请选择商品分类", trigger: "blur" }
         ],
       },
       // 上传参数
@@ -265,11 +298,13 @@ export default {
       },
       formLoading: false,
       resourceDomain: {},
+      typeList: [],//商品分类
     };
   },
   created() {
     this.getList();
     this.getCookie()
+    this.getListType()
   },
   methods: {
     /** 查询【请填写功能名称】列表 */
@@ -400,7 +435,30 @@ export default {
     getCookie() {
       this.resourceDomain = JSON.parse(Cookies.get("config"));
       console.log(this.resourceDomain)
-    }
+    },
+    // 获取商品分类
+    getListType() {
+      this.loading = true;
+      listType({
+        pageNum: 1,
+        pageSize: 10000,
+      }).then(response => {
+        this.typeList = response.rows;
+        this.total = response.total;
+        this.loading = false;
+      });
+    },
+    // 修改启用状态
+    changeStatus(id,status){
+      updateProject(
+        {
+          id: id,
+          status : status
+        }
+      ).then(response => {
+        this.$modal.msgSuccess("修改成功");
+      });
+    },
   }
 };
 </script>
