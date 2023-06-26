@@ -83,10 +83,11 @@
           <img class="img-class" :src="resourceDomain.resourceDomain + scope.row.img" />
         </template> 
       </el-table-column>
-      <el-table-column label="商品金额(万元)" align="center" prop="projectAmount" />
+      <!-- <el-table-column label="商品金额(万元)" align="center" prop="projectAmount" /> -->
       <el-table-column label="收益率（%）" align="center" prop="incomeRate" />
       <el-table-column label="期限(分钟)" align="center" prop="limitTime" />
-      <el-table-column label="起投金额" align="center" prop="minAmount" />
+      <el-table-column label="库存" align="center" prop="schedule" />
+      <el-table-column label="商品金额" align="center" prop="minAmount" />
       <el-table-column label="是否开启" align="center" prop="status">
         <template slot-scope="scope">
           <el-switch
@@ -153,16 +154,20 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="商品金额(万元)" prop="projectAmount">
+        <!-- <el-form-item label="商品金额(万元)" prop="projectAmount">
           <el-input v-model="form.projectAmount" placeholder="请输入商品金额(万元)" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="收益率" prop="incomeRate">
           <el-input v-model="form.incomeRate" placeholder="请输入收益率" />
         </el-form-item>
         <el-form-item label="期限(分钟)" prop="limitTime">
-          <el-input v-model="form.limitTime" placeholder="请输入期限(分钟)" />
+          <el-select v-model="form.limitTime">
+            <el-option label="3分钟" :value="3"></el-option>
+            <el-option label="5分钟" :value="5"></el-option>
+            <el-option label="10分钟" :value="10"></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="起投金额" prop="minAmount">
+        <el-form-item label="商品金额" prop="minAmount">
           <el-input v-model="form.minAmount" placeholder="请输入起投金额" />
         </el-form-item>
         <el-form-item label="开始时间" prop="startTime">
@@ -181,8 +186,8 @@
             placeholder="选择日期时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="商品进度" prop="schedule">
-          <el-input v-model="form.schedule" placeholder="请输入商品进度" />
+        <el-form-item label="库存" prop="schedule">
+          <el-input v-model="form.schedule" placeholder="请输入商品库存" />
         </el-form-item>
         <el-form-item label="排序号(值越大越靠前)" prop="sort">
           <el-input v-model="form.sort" placeholder="请输入排序号(值越大越靠前)" />
