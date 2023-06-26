@@ -57,6 +57,11 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="分类名称" align="center" prop="typeName" />
+      <el-table-column label="分类图标" align="center">
+        <template slot-scope="scope">
+          <img class="img-class" :src="resourceDomain.resourceDomain + scope.row.img" />
+        </template>  
+      </el-table-column>
       <el-table-column label="开启状态" align="center" prop="status">
         <template slot-scope="scope">
           <el-switch
@@ -99,10 +104,23 @@
     />
 
     <!-- 添加或修改商品分类对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body :loading="formLoading">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="分类名称" prop="typeName">
           <el-input v-model="form.typeName" placeholder="请输入分类名称" />
+        </el-form-item>
+        <el-form-item label="图片上传" prop="img">
+          <el-upload
+              class="avatar-uploader"
+              :action="upload.url"
+              :file-list="upload.fileList"
+              :headers="upload.headers"
+              :show-file-list="false"
+              :on-success="successHandle"
+              :before-upload="beforeUploadHandle">
+              <img v-if="form.img" :src="resourceDomain.resourceDomain + form.img" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
         </el-form-item>
         <el-form-item label="排序号" prop="sort">
           <el-input v-model="form.sort" placeholder="请输入排序号" />
@@ -118,6 +136,8 @@
 
 <script>
 import { listType, getType, delType, addType, updateType } from "@/api/business/type";
+import { getToken } from "@/utils/auth";
+import Cookies from "js-cookie";
 
 export default {
   name: "Type",
@@ -150,11 +170,25 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      resourceDomain: {},
+      // 上传参数
+      upload: {
+        // 是否禁用上传
+        isUploading: false,
+        // 设置上传的请求头部
+        headers: { Authorization: "Bearer " + getToken() },
+        // 上传的地址
+        url: process.env.VUE_APP_BASE_API + "/system/info/upload",
+        // 上传的文件列表
+        fileList: []
+      },
+      formLoading: false,
     };
   },
   created() {
     this.getList();
+    this.getCookie()
   },
   methods: {
     /** 查询商品分类列表 */
@@ -260,6 +294,56 @@ export default {
         this.$modal.msgSuccess("修改成功");
       });
     },
+    getCookie() {
+      this.resourceDomain = JSON.parse(Cookies.get("config"));
+    },
+    // 上传图片
+    beforeUploadHandle (file) {
+      this.formLoading = true
+      if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+        this.$message.error('只支持jpg、png、gif格式的图片！')
+        return false
+      }
+    },
+    // 上传成功
+    successHandle (response, file, fileList) {
+      this.fileList = fileList
+      if (response && response.code === 200) {
+        this.form.img = response.data.filePath;
+        console.log(this.form.img)
+      } else {
+        // this.$message.error(response.msg)
+      }
+      this.formLoading = false
+    },
   }
 };
 </script>
+<style>
+.img-class{
+  height: 50px;
+}
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+</style>

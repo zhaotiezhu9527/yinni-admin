@@ -439,7 +439,6 @@ export default {
     },
     getCookie() {
       this.resourceDomain = JSON.parse(Cookies.get("config"));
-      console.log(this.resourceDomain)
     },
     // 获取商品分类
     getListType() {
