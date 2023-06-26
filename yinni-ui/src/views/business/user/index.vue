@@ -35,6 +35,9 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item>
+        <el-checkbox v-model="queryParams.online" border :true-label="1" :false-label="0">在线会员</el-checkbox>
+      </el-form-item>
       <el-form-item label="注册时间" prop="registerTime">
         <el-date-picker
           v-model="dateRange"
@@ -465,6 +468,7 @@ export default {
         userStatus: "",
         userAgent: null,
         registerTime: null,
+        online: 0,
       },
       // 表单参数
       form: {},

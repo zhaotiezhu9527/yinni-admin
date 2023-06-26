@@ -6,8 +6,8 @@
       <el-row :gutter="12">
         <el-col :span="8">
           <el-card shadow="always" class="margin-top10">
-            <div>注册量</div>
-            <div>{{ dayReportList.today.registerCount}} 人</div>
+            <div>注册人数 / 当前在线人数</div>
+            <div>{{ dayReportList.today.registerCount}} 人 / {{ dayReportList.today.onlineCount}} 人</div>
           </el-card>
         </el-col>
         <el-col :span="8">
