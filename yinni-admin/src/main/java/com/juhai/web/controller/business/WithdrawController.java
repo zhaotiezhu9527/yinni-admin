@@ -209,7 +209,7 @@ public class WithdrawController extends BaseController
             account.setUserAgent(user.getUserAgent());
             account.setRefNo(withdraw.getOrderNo());
             account.setAccountNo(IdUtil.getSnowflakeNextIdStr());
-            account.setRemark("提现退还金额:" + withdraw.getOptAmount() + "元");
+            account.setRemark("jumlah pengembalian uang");
             accountService.insertAccount(account);
         }
         return toAjax(true);
