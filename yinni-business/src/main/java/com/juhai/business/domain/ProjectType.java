@@ -37,6 +37,17 @@ public class ProjectType extends BaseEntity
     @Excel(name = "排序号")
     private Long sort;
 
+    @Excel(name = "图片")
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public void setId(Long id)
     {
         this.id = id;
