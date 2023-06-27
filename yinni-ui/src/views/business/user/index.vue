@@ -117,7 +117,7 @@
           >用户详情</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="USDT钱包地址" align="center" prop="walletAddr" width="200"/>
+      <!-- <el-table-column label="USDT钱包地址" align="center" prop="walletAddr" width="200"/> -->
       <el-table-column label="银行信息" align="center" prop="bankName" width="300">
         <template slot-scope="scope">
           <div>{{scope.row.bankName}}</div>
@@ -241,9 +241,9 @@
         <!-- <el-form-item label="邀请码" prop="inviteCode">
           <el-input v-model="form.inviteCode" placeholder="请输入邀请码" />
         </el-form-item> -->
-        <el-form-item label="钱包地址" prop="walletAddr">
+        <!-- <el-form-item label="钱包地址" prop="walletAddr">
           <el-input v-model="form.walletAddr" placeholder="请输入钱包地址" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="银行卡号" prop="bankCardNum">
           <el-input v-model="form.bankCardNum" placeholder="请输入银行卡号" />
         </el-form-item>
@@ -302,9 +302,9 @@
           </el-select>
         </el-form-item>
         <el-form-item label="货币类型" prop="type">
-          <el-select v-model="balanceForm.amountType" placeholder="请选择货币类型">
-            <el-option label="人民币" :value="1"></el-option>
-            <el-option label="USDT" :value="2"></el-option>
+          <el-select :disabled="true" v-model="balanceForm.amountType" placeholder="请选择货币类型">
+            <el-option label="印尼盾" :value="1"></el-option>
+            <!-- <el-option label="USDT" :value="2"></el-option> -->
           </el-select>
         </el-form-item>
         <el-form-item label="修改理由" prop="remark">
@@ -370,9 +370,9 @@
         <el-form-item label="身份证号码">
           <el-input :disabled="true" v-model="userform.idCard" />
         </el-form-item>
-        <el-form-item label="USDT地址">
+        <!-- <el-form-item label="USDT地址">
           <el-input :disabled="true" v-model="userform.walletAddr"/>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="银行名称">
           <el-input :disabled="true" v-model="userform.bankName"/>
         </el-form-item>
@@ -477,6 +477,7 @@ export default {
       // 增减余额表单数据
       balanceForm: {
         remark:'',
+        amountType: 1,
       },
       // 表单校验
       rules: {
