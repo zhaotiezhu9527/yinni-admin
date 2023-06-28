@@ -25,10 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lastTime"    column="last_time"    />
         <result property="lastIp"    column="last_ip"    />
         <result property="modifyTime"    column="modify_time"    />
+        <result property="userPhone"    column="user_phone"    />
+        <result property="address"    column="address"    />
     </resultMap>
 
     <sql id="selectUserVo">
-        select id, user_name, balance, real_name, id_card, login_pwd, pay_pwd, invite_code, wallet_addr, bank_card_num, bank_name, bank_addr, user_status, user_level_id, user_agent, register_time, register_ip, last_time, last_ip, modify_time from t_user
+        select id, user_name, user_phone, address, balance, real_name, id_card, login_pwd, pay_pwd, invite_code, wallet_addr, bank_card_num, bank_name, bank_addr, user_status, user_level_id, user_agent, register_time, register_ip, last_time, last_ip, modify_time from t_user
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
@@ -53,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastTime != null "> and last_time = #{lastTime}</if>
             <if test="lastIp != null  and lastIp != ''"> and last_ip = #{lastIp}</if>
             <if test="modifyTime != null "> and modify_time = #{modifyTime}</if>
+            <if test="userPhone != null "> and user_phone = #{userPhone}</if>
 
             <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
                 AND date_format(register_time,'%Y-%m-%d %H:%i:%S') &gt;= date_format(#{params.beginTime},'%Y-%m-%d %H:%i:%S')
@@ -99,6 +102,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastTime != null">last_time,</if>
             <if test="lastIp != null">last_ip,</if>
             <if test="modifyTime != null">modify_time,</if>
+            <if test="userPhone != null">user_phone,</if>
+            <if test="address != null">address,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null and userName != ''">#{userName},</if>
@@ -120,6 +125,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastTime != null">#{lastTime},</if>
             <if test="lastIp != null">#{lastIp},</if>
             <if test="modifyTime != null">#{modifyTime},</if>
+            <if test="userPhone != null">#{userPhone},</if>
+            <if test="address != null">#{address},</if>
          </trim>
     </insert>
 
@@ -136,6 +143,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bankAddr != null">bank_addr = #{bankAddr},</if>
             <if test="userStatus != null">user_status = #{userStatus},</if>
             <if test="balance != null">balance = #{balance},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="userPhone != null">user_phone = #{userPhone},</if>
 
             <!--            <if test="userName != null and userName != ''">user_name = #{userName},</if>-->
             <!--            <if test="inviteCode != null">invite_code = #{inviteCode},</if>-->

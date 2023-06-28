@@ -109,6 +109,28 @@ public class User extends BaseEntity
     @Excel(name = "最后修改时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
+    @Excel(name = "用户手机号")
+    private String userPhone;
+
+    @Excel(name = "用户地址")
+    private String address;
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @TableField(exist = false)
     private int online;
 
