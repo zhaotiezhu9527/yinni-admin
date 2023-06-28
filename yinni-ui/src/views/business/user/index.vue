@@ -124,7 +124,13 @@
           <div>{{scope.row.bankAddr}}</div>
           <div>{{scope.row.bankCardNum}}</div>
         </template>
-      </el-table-column>>
+      </el-table-column>
+      <el-table-column label="收货信息" align="center" width="200">
+        <template slot-scope="scope">
+          <div>{{scope.row.userPhone}}</div>
+          <div>{{scope.row.address}}</div>
+        </template>
+      </el-table-column>
       <!-- <el-table-column label="支行信息" align="center" prop="bankAddr" />
       <el-table-column label="银行卡号" align="center" prop="bankCardNum" /> -->
       <el-table-column label="状态" align="center" prop="userStatus" width="200">
@@ -259,6 +265,12 @@
             <el-option label="未实名" :value="1"></el-option>
           </el-select>
         </el-form-item> -->
+        <el-form-item label="用户手机号">
+          <el-input v-model="form.userPhone" />
+        </el-form-item>
+        <el-form-item label="收货地址">
+          <el-input v-model="form.address" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -381,6 +393,12 @@
         </el-form-item>
         <el-form-item label="银行卡号">
           <el-input :disabled="true" v-model="userform.bankCardNum" />
+        </el-form-item>
+        <el-form-item label="用户手机号">
+          <el-input :disabled="true" v-model="userform.userPhone" />
+        </el-form-item>
+        <el-form-item label="收货地址">
+          <el-input :disabled="true" v-model="userform.address" />
         </el-form-item>
         <!-- <el-form-item label="登录密码">
           <el-input :disabled="true" v-model="userform.loginPwd" />
