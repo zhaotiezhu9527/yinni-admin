@@ -165,6 +165,8 @@
             <el-option label="3分钟" :value="3"></el-option>
             <el-option label="5分钟" :value="5"></el-option>
             <el-option label="10分钟" :value="10"></el-option>
+            <el-option label="12小时" :value="720"></el-option>
+            <el-option label="24小时" :value="1440"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="商品金额" prop="minAmount">
