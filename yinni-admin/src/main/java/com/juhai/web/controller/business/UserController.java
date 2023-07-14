@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 【请填写功能名称】Controller
@@ -59,6 +60,9 @@ public class UserController extends BaseController
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    @Autowired
+    private ILevelService levelService;
+
     /**
      * 查询【请填写功能名称】列表
      */
@@ -83,8 +87,14 @@ public class UserController extends BaseController
             user.getParams().put("onlineNames", onlineNames);
         }
 
+        List<Level> levels = levelService.list();
+        Map<Long, String> levelMap = levels.stream().collect(Collectors.toMap(Level::getId, e -> e.getLevelName()));
+
         startPage();
         List<User> list = userService.selectUserList(user);
+        for (User user1 : list) {
+            user1.setLevelName(levelMap.getOrDefault(user1.getLevelId(), "-"));
+        }
         return getDataTable(list);
     }
 
@@ -200,7 +210,7 @@ public class UserController extends BaseController
         temp.setLastTime(null);
         temp.setLastIp(null);
         temp.setModifyTime(now);
-
+        temp.setLevelId(1L);
         return toAjax(userService.insertUser(temp));
     }
 
