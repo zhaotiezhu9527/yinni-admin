@@ -115,6 +115,28 @@ public class User extends BaseEntity
     @Excel(name = "用户地址")
     private String address;
 
+    @Excel(name = "等级ID")
+    private Long levelId;
+
+    @TableField(exist = false)
+    private String levelName;
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public Long getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Long levelId) {
+        this.levelId = levelId;
+    }
+
     public String getUserPhone() {
         return userPhone;
     }
