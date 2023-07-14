@@ -25,6 +25,17 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="会员等级" prop="levelId">
+          <el-select v-model="queryParams.levelId" placeholder="请选择">
+            <el-option label="全部" value=""></el-option>
+            <el-option
+              v-for="item in levelList"
+              :key="item.id"
+              :label="item.levelName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
       <el-form-item label="状态" prop="userStatus">
         <el-select v-model="queryParams.userStatus" placeholder="请选择">
           <el-option
@@ -145,9 +156,9 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="会员等级" align="center" prop="userLevelId" >
+      <el-table-column label="会员等级" align="center" prop="levelName" >
         <template slot-scope="scope">
-          <span>{{scope.row.userLevelId === 0 ? '普通会员' : '未知等级' }}</span>
+          <span>{{scope.row.levelName}}</span>
         </template>
       </el-table-column>
       <el-table-column label="推荐人用户名" align="center" prop="userAgent" />
@@ -232,6 +243,17 @@
         <el-form-item label="用户名" prop="userName">
           <el-input :disabled="true" v-model="form.userName" placeholder="请输入用户名" />
         </el-form-item>
+        <el-form-item label="会员等级" prop="levelId">
+          <el-select v-model="form.levelId" placeholder="请选择">
+            <el-option
+              v-for="item in levelList"
+              :key="item.id"
+              :label="item.levelName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        
         <el-form-item label="真实姓名" prop="realName">
           <el-input v-model="form.realName" placeholder="请输入真实姓名" />
         </el-form-item>
@@ -448,6 +470,7 @@
 
 <script>
 import { listUser, getUser, delUser, addUser, updateUser,balanceUser ,resetBalance,getAgentUser ,getSubUser} from "@/api/business/user";
+import { listLevel } from "@/api/business/level";
 import { dateFormat} from '@/utils/auth'
 
 export default {
@@ -487,6 +510,7 @@ export default {
         userAgent: null,
         registerTime: null,
         online: 0,
+        levelId: "",
       },
       // 表单参数
       form: {},
@@ -577,12 +601,14 @@ export default {
         userName: '',
         balance: '',
       },//重置余额数据
-      reasonList:['增加投资','提款失败退回','保证金退回','提款成功扣除','股权分红','股权']
+      reasonList:['增加投资','提款失败退回','保证金退回','提款成功扣除','股权分红','股权'],
+      levelList:[],//等级列表
     };
   },
   created() {
     // this.getDefaultTime()
     this.getList();
+    this.getLevelList()
   },
   methods: {
     /** 查询【请填写功能名称】列表 */
@@ -820,6 +846,15 @@ export default {
     //修改理由
     changeReason(value){
       this.balanceForm.remark = value
+    },
+    // 获取等级列表
+    getLevelList() {
+      listLevel({
+        pageNum: 1,
+        pageSize: 1000,
+      }).then(response => {
+        this.levelList = response.rows;
+      });
     },
   }
 };
